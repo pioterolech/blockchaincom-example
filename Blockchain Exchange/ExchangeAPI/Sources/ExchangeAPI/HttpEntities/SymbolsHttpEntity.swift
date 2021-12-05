@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SymbolsHttpEntity: Codable {
+public struct SymbolsHttpEntity: Codable {
     let baseCurrency: String
     let baseCurrencyScale: Int
     let counterCurrency: String

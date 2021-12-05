@@ -1,6 +1,6 @@
 name: ExchangeAPI
 options:
-  bundleIdPrefix: com.navia.framework.excahngeapi
+  bundleIdPrefix: com.navia.framework.exchangeapi
   deploymentTarget:
     iOS: 15
 packages:

@@ -1,7 +1,11 @@
 import RxSwift
 import Foundation
 
-public class ExchangeAPI {
+public protocol ExchangeAPIInterface {
+    func symbols() -> Observable<[String: SymbolsHttpEntity]>
+}
+
+public final class ExchangeAPI: ExchangeAPIInterface {
     private let engine: HttpEngingeInterface
     private let urlFactory: URLFactory
 
@@ -10,7 +14,7 @@ public class ExchangeAPI {
         self.urlFactory = urlFactory
     }
 
-    func symbols() -> Observable<[String: SymbolsHttpEntity]> {
+    public func symbols() -> Observable<[String: SymbolsHttpEntity]> {
         engine.fetch(with: urlFactory.symbols)
     }
 }
