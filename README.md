@@ -1,1 +1,1 @@
-# blockchaincom-example
+# Blockchain.com MVVM+Rx client example.
