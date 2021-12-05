@@ -1,0 +1,102 @@
+{
+  "entries": {
+    "brew": {
+      "mint": {
+        "version": "0.16.0",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/mint-0.16.0.big_sur.bottle.tar.gz",
+              "sha256": "599c2482d15b729dc72ffa23d38599d551a42b70b81079b9a573cd91bc78d8d0"
+            },
+            "arm64_big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/mint-0.16.0.arm64_big_sur.bottle.tar.gz",
+              "sha256": "eaf4c91e17438d0968ff29a6429c55f93c0aa02614f2c3f7a1a4b106375dd085"
+            },
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/mint-0.16.0.catalina.bottle.tar.gz",
+              "sha256": "376d67667e9003d503368e39d89a2592dd91daec615310bb2fad3d9ee971d8a8"
+            }
+          }
+        }
+      },
+      "sourcery": {
+        "version": "1.0.2",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/sourcery-1.0.2.big_sur.bottle.tar.gz",
+              "sha256": "f717a8df9128e3714c72edea739f7ea8fa1aebce8a5204d7ac7ac2f03c7c6b16"
+            },
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/sourcery-1.0.2.catalina.bottle.tar.gz",
+              "sha256": "7374695fa0685ccb4f432b260c8a2bd33e7d9f8ade55ae7ade0dece6771006bb"
+            }
+          }
+        }
+      },
+      "swiftlint": {
+        "version": "0.42.0",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/swiftlint-0.42.0.big_sur.bottle.tar.gz",
+              "sha256": "1a0540f0ff6cac2da0a51672db7963aef71cc58954c34791e9b01dafd63c5898"
+            },
+            "arm64_big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/swiftlint-0.42.0.arm64_big_sur.bottle.tar.gz",
+              "sha256": "a9cf09a414fd3b8a5cb3d94e682a725f654a4d1caef19497a500d6dbb926ba7c"
+            },
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/swiftlint-0.42.0.catalina.bottle.tar.gz",
+              "sha256": "e9023ed754eb8cb78a9f2b469a90875ca42a7afffd3e96f8142252e81d889793"
+            }
+          }
+        }
+      },
+      "xcodegen": {
+        "version": "2.18.0",
+        "bottle": {
+          "cellar": ":any_skip_relocation",
+          "prefix": "/usr/local",
+          "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.18.0.big_sur.bottle.tar.gz",
+              "sha256": "954d8df6e5e76c59471482dce21df05bed22382e30d1b5cc9bfa6e024508106c"
+            },
+            "arm64_big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.18.0.arm64_big_sur.bottle.tar.gz",
+              "sha256": "3943c560dbe8bae0c4e75b43920711219e4f1e1c80b8455ea488e8029d9864cb"
+            },
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.18.0.catalina.bottle.tar.gz",
+              "sha256": "72a74170b8b457db6bce90da3daaa6520a24bef3d46d4dfbfd3599bfe45a8b5b"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/xcodegen-2.18.0.mojave.bottle.tar.gz",
+              "sha256": "1d64fc7e6f3ade59a08eb9b9105c3b1d20d8d9cb4b4de2539590733fd203e014"
+            }
+          }
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "big_sur": {
+        "HOMEBREW_VERSION": "2.7.1",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "32298a14f8a133178e81f8dd585b5458824cfab1",
+        "CLT": "",
+        "Xcode": "13.1",
+        "macOS": "11.5.1"
+      }
+    }
+  }
+}
