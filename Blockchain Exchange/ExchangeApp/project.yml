@@ -1,0 +1,70 @@
+name: ExchangeApp
+options:
+  bundleIdPrefix: com.navia.framework
+  deploymentTarget:
+    iOS: 15
+projectReferences:
+  ExchangeAPI:
+    path: ../ExchangeAPI/ExchangeAPI.xcodeproj
+  ExchangeServices:
+    path: ../ExchangeServices/ExchangeServices.xcodeproj
+packages:
+  RxSwift:
+    url: "https://github.com/ReactiveX/RxSwift"
+    majorVersion: 6.2.0
+targets:
+  ExchangeApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: ExchangeApp
+    dependencies:
+      - package: RxSwift
+      - target: ExchangeServices/ExchangeServices
+      - target: ExchangeAPI/ExchangeAPI
+    preBuildScripts:
+      - path: ../Scripts/preBuildScript.sh
+        name: Swiftlint, Sourcery
+  ExchangeAppUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ExchangeAppTests
+    dependencies:
+      - target: ExchangeApp
+      - package: RxSwift 
+        product: RxTest
+      - package: RxSwift 
+        product: RxCocoa
+  ExchangeAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ExchangeAppUITests
+    dependencies:
+      - target: ExchangeApp
+schemes:
+  ExchangeApp:
+    build:
+      targets:
+        ExchangeApp: all
+    test:
+      targets: 
+        - ExchangeApp 
+  ExchangeAppUnitTests:
+    build:
+      targets:
+        ExchangeAppUnitTests: all
+    test:
+      gatherCoverageData: true
+      coverageTargets:
+        - ExchangeApp
+      targets: 
+        - ExchangeAppUnitTests 
+  ExchangeAppUITests:
+    build:
+      targets:
+        ExchangeAppUITests: all
+    test:
+      targets: 
+        - ExchangeAppUITests 
