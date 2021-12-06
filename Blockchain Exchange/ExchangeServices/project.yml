@@ -1,6 +1,6 @@
 name: ExchangeServices
 options:
-  bundleIdPrefix: com.navia.framework.exchangeservices
+  bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
 projectReferences:
@@ -28,7 +28,8 @@ targets:
     sources:
       - path: Tests
     dependencies:
-      - target: ExchangeServices
+      - target: ExchangeAPI/ExchangeAPI
+        codeSign: false
       - package: RxSwift 
         product: RxTest
       - package: RxSwift 

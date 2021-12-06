@@ -1,6 +1,6 @@
 name: ExchangeAPI
 options:
-  bundleIdPrefix: com.navia.framework.exchangeapi
+  bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
 packages:
@@ -25,6 +25,7 @@ targets:
       - path: Tests/UnitTests
     dependencies:
       - target: ExchangeAPI
+        codeSign: false
       - package: RxSwift 
         product: RxTest
       - package: RxSwift 
@@ -36,6 +37,7 @@ targets:
       - path: Tests/IntegrationTests
     dependencies:
       - target: ExchangeAPI
+        codeSign: false
       - package: RxSwift
         product: RxBlocking
 schemes:
