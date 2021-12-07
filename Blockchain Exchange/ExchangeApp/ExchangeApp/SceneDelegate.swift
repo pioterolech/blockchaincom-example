@@ -11,7 +11,6 @@ import Cleanse
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var componentFactory: ComponentFactory<MainComponent>?
     var componentFactoryInjector: PropertyInjector<SceneDelegate>?
-
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,

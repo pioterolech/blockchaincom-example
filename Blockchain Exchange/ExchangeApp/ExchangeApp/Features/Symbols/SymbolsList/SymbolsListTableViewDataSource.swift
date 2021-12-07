@@ -25,7 +25,7 @@ final class SymbolsListTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = UITableViewCell()
         var config = cell.defaultContentConfiguration()
         config.text = "Hello, world"
         cell.contentConfiguration = config

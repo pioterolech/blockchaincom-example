@@ -14,6 +14,7 @@ struct MainComponent: Cleanse.RootComponent {
     typealias Root = PropertyInjector<SceneDelegate>
     typealias Scope = Singleton
     typealias Seed = UIWindowScene
+    typealias PropertyInjectorBinder  = PropertyInjectionReceiptBinder<SceneDelegate>
 
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: UIKitModule.self)
@@ -25,7 +26,7 @@ struct MainComponent: Cleanse.RootComponent {
         return bind.propertyInjector(configuredWith: MainComponent.configureAppDelegateInjector)
     }
 
-    static func configureAppDelegateInjector(binder bind: PropertyInjectionReceiptBinder<SceneDelegate>) -> BindingReceipt<PropertyInjector<SceneDelegate>> {
+    static func configureAppDelegateInjector(binder bind: PropertyInjectorBinder) -> BindingReceipt<Root> {
         return bind.to(injector: SceneDelegate.injectProperties)
     }
 }

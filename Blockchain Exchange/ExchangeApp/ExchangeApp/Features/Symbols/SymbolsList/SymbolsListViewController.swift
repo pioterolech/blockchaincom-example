@@ -9,7 +9,7 @@ import UIKit
 
 class SymbolsListViewController: UIViewController, UITableViewDelegate {
     private let tableView: UITableView
-    private weak var dataSource: SymbolsListTableViewDataSource?
+    private let dataSource: SymbolsListTableViewDataSource
 
     init(tableView: UITableView, dataSource: SymbolsListTableViewDataSource) {
         self.tableView = tableView
@@ -26,7 +26,6 @@ class SymbolsListViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.rowHeight = 44
-//        tableView.estimatedRowHeight = 44
 
         view.backgroundColor = .red
         title = "Symbol view"
