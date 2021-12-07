@@ -3,15 +3,15 @@ options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
+packages:
+  Cleanse:
+    url: "https://github.com/square/Cleanse"
+    majorVersion: 4.2.6
 projectReferences:
   ExchangeAPI:
     path: ../ExchangeAPI/ExchangeAPI.xcodeproj
   ExchangeServices:
     path: ../ExchangeServices/ExchangeServices.xcodeproj
-packages:
-  RxSwift:
-    url: "https://github.com/ReactiveX/RxSwift"
-    majorVersion: 6.2.0
 targets:
   ExchangeApp:
     type: application
@@ -19,9 +19,9 @@ targets:
     sources:
       - path: ExchangeApp
     dependencies:
-      - package: RxSwift
       - target: ExchangeServices/ExchangeServices
       - target: ExchangeAPI/ExchangeAPI
+      - package: Cleanse
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery
@@ -32,10 +32,6 @@ targets:
       - path: ExchangeAppTests
     dependencies:
       - target: ExchangeApp
-      - package: RxSwift 
-        product: RxTest
-      - package: RxSwift 
-        product: RxCocoa
   ExchangeAppUITests:
     type: bundle.ui-testing
     platform: iOS

@@ -6,10 +6,6 @@ options:
 projectReferences:
   ExchangeAPI:
     path: ../ExchangeAPI/ExchangeAPI.xcodeproj
-packages:
-  RxSwift:
-    url: "https://github.com/ReactiveX/RxSwift"
-    majorVersion: 6.2.0
 targets:
   ExchangeServices:
     type: framework
@@ -17,7 +13,6 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - package: RxSwift
       - target: ExchangeAPI/ExchangeAPI
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
@@ -30,10 +25,6 @@ targets:
     dependencies:
       - target: ExchangeAPI/ExchangeAPI
         codeSign: false
-      - package: RxSwift 
-        product: RxTest
-      - package: RxSwift 
-        product: RxCocoa
 schemes:
   ExchangeServices:
     build:
