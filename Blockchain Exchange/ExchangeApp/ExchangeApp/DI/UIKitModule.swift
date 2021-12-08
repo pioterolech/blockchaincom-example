@@ -25,7 +25,7 @@ struct UIWindowModule: Cleanse.Module {
     static func configure(binder: Binder<Singleton>) {
         binder
             .bind(UIWindow.self)
-            .to { (rootViewController: UINavigationController, _: SymbolsRouter, windowScene: UIWindowScene) -> UIWindow in
+            .to { (rootViewController: UINavigationController, windowScene: UIWindowScene) -> UIWindow in
                 let window = UIWindow(windowScene: windowScene)
                 window.rootViewController = rootViewController
                 return window

@@ -12,7 +12,6 @@ import Cleanse
 
 struct ExchangeServiceModule: Module {
     static func configure(binder: Binder<Singleton>) {
-
         binder
             .bind(ExchangeSymbolsService.self)
             .to { (apiClient: ExchangeAPIInterface) in

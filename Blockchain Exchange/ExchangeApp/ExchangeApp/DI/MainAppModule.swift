@@ -19,6 +19,7 @@ struct MainComponent: Cleanse.RootComponent {
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: UIKitModule.self)
         binder.include(module: NavigationModule.self)
+        binder.include(module: SymbolDetailModule.self)
         binder.include(module: SymbolsListModule.self)
         binder.include(module: SymbolsRouterModule.self)
         binder.include(module: ExchangeAPIModule.self)

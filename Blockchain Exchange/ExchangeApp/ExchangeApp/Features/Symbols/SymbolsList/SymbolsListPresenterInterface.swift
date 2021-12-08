@@ -17,6 +17,7 @@ protocol SymbolsListPresenterInterface {
 
 struct SymbolsListPresenterInput {
     struct FetchSymbols: SymbolsListPresenterInputInterface { }
+    struct DidSelectItem: SymbolsListPresenterInputInterface { let index: Int }
 }
 
 struct SymbolsListPresenterOutput {

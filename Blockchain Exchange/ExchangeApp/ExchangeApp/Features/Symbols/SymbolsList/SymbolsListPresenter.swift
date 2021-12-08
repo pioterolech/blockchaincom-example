@@ -10,12 +10,12 @@ import ExchangeServices
 import RxSwift
 import RxSwiftExt
 import RxCocoa
-import Cleanse
 
-class SymbolsListPresenter: SymbolsListPresenterInterface {
+final class SymbolsListPresenter: SymbolsListPresenterInterface {
     typealias Input = SymbolsListPresenterInput
     typealias Output = SymbolsListPresenterOutput
 
+    weak var router: SymbolsRouterInterface?
     var input: PublishRelay<SymbolsListPresenterInputInterface>
     var output: Driver<SymbolsListPresenterOutputInterface> {
         driverRelay.asDriver(onErrorJustReturn: Output.InternalError(errorReason: "") )
@@ -23,31 +23,52 @@ class SymbolsListPresenter: SymbolsListPresenterInterface {
 
     private let disposeBag = DisposeBag()
     private let symbolsService: ExchangeSymbolsServiceInterface
-    weak var router: SymbolsRouterInterface?
     private var driverRelay: PublishRelay<SymbolsListPresenterOutputInterface>
+    private var currentElements: BehaviorRelay<[String]>
 
     init(symbolsService: ExchangeSymbolsServiceInterface) {
         self.symbolsService = symbolsService
         self.input = .init()
         self.driverRelay = .init()
+        self.currentElements = .init(value: [])
 
-        setupBindings()
+        setupFetchBindings()
+        setupDetailsBindings()
     }
 
-    func setupBindings() {
+    private func setupFetchBindings() {
         let fetchSymbolsInput = input.filter { $0 is Input.FetchSymbols }
         let fetchResult = fetchSymbolsInput.append(weak: self).flatMap { presenter, _ in
             presenter.symbolsService.symbols().materialize()
-        }
+        }.share()
 
         fetchResult.elements()
                    .map { Output.SymbolsFetchSuccess(symbols: $0) }
                    .bind(to: driverRelay)
                    .disposed(by: disposeBag)
 
+        fetchResult.elements().bind(to: currentElements).disposed(by: disposeBag)
+
         fetchResult.errors()
                     .map { _ in Output.SymbolsFetchFailed() }
                     .bind(to: driverRelay)
                     .disposed(by: disposeBag)
+    }
+
+    private func setupDetailsBindings() {
+        let fetchSymbolsInput = input.compactMap { $0 as? Input.DidSelectItem }
+                                     .append(weak: self)
+                                     .filter { $0.currentElements.value.count > $1.index }
+                                     .map { $0.currentElements.value[$1.index] }
+
+        fetchSymbolsInput.bind(to: showDetailBinder).disposed(by: disposeBag)
+    }
+}
+
+extension SymbolsListPresenter {
+    var showDetailBinder: RxSwift.Binder<String> {
+        return Binder(self) { view, data in
+            view.router?.showSymbolDetails(symbol: data)
+        }
     }
 }

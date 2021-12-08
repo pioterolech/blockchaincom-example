@@ -25,7 +25,10 @@ final class SymbolsListTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier") else {
+            return UITableViewCell()
+        }
+
         var config = cell.defaultContentConfiguration()
         config.text = dataRelay.value[indexPath.row]
         cell.contentConfiguration = config

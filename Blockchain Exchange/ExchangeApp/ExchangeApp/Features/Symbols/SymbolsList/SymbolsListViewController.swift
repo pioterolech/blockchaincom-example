@@ -30,6 +30,8 @@ final class SymbolsListViewController: UIViewController, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.rowHeight = 44
@@ -39,12 +41,13 @@ final class SymbolsListViewController: UIViewController, UITableViewDelegate {
 
         view.addSubviewAndFill(tableView)
 
-        setupBindings()
+        fetchDataBindings()
+        tableViewSelectionBindings()
 
         presenter.input.accept(SymbolsListPresenterInput.FetchSymbols())
     }
 
-    private func setupBindings() {
+    private func fetchDataBindings() {
         let success = presenter.output.compactMap { $0 as? SymbolsListPresenterOutput.SymbolsFetchSuccess }
         let failure = presenter.output.compactMap { $0 as? SymbolsListPresenterOutput.SymbolsFetchFailed }
         let startFetch = presenter.input.compactMap { $0 as? SymbolsListPresenterInput.FetchSymbols }
@@ -54,9 +57,15 @@ final class SymbolsListViewController: UIViewController, UITableViewDelegate {
 
         success.map { $0.symbols }.drive(rx.reloadData).disposed(by: disposeBag)
     }
+
+    private func tableViewSelectionBindings() {
+        tableView.rx.itemSelected
+                 .map { SymbolsListPresenterInput.DidSelectItem(index: $0.row) }
+                 .bind(to: presenter.input).disposed(by: disposeBag)
+    }
 }
 
-extension Reactive where Base: SymbolsListViewController {
+private extension Reactive where Base: SymbolsListViewController {
     var reloadData: Binder<[String]> {
         return Binder(self.base) { view, data in
             view.dataSource.dataRelay.accept(data)

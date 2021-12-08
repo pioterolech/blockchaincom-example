@@ -14,8 +14,10 @@ struct SymbolsListModule: Module {
     static func configure(binder: Binder<Unscoped>) {
         binder
             .bind(SymbolsListPresenter.self)
-            .to { (service: ExchangeSymbolsService) in
-                return SymbolsListPresenter(symbolsService: service)
+            .to { (service: ExchangeSymbolsService, router: SymbolsRouter) in
+                let presenter = SymbolsListPresenter(symbolsService: service)
+                presenter.router = router
+                return presenter
             }
 
         binder

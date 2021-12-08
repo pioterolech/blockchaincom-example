@@ -8,15 +8,15 @@
 import Foundation
 import Cleanse
 import UIKit
+import WebKit
 
 struct SymbolsRouterModule: Module {
-    static func configure(binder: Binder<Unscoped>) {
+    static func configure(binder: Binder<Singleton>) {
         binder
             .bind(SymbolsRouter.self)
-            .to { (navigation: UINavigationController, view: SymbolsListViewController, presenter: SymbolsListPresenter) -> SymbolsRouter in
-                let router = SymbolsRouter(navigationVC: navigation, view: view)
-                presenter.router = router
-                return router
+            .sharedInScope()
+            .to { (factory: Factory<SymbolsDetailAssistedFactory>) -> SymbolsRouter in
+                return SymbolsRouter(factory: factory)
             }
     }
 }

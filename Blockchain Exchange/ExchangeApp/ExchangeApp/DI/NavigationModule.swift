@@ -10,12 +10,15 @@ import Cleanse
 import UIKit
 
 struct NavigationModule: Cleanse.Module {
+
     static func configure(binder: Binder<Singleton>) {
         binder
           .bind(UINavigationController.self)
           .sharedInScope()
-          .to(factory: { () -> UINavigationController in
-              return UINavigationController()
+          .to(factory: { (view: SymbolsListViewController, router: SymbolsRouter) -> UINavigationController in
+              let nav = UINavigationController(rootViewController: view)
+              router.navigationVC = nav
+              return nav
           })
     }
 }

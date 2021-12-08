@@ -7,19 +7,21 @@
 
 import Foundation
 import UIKit
+import Cleanse
 
 protocol SymbolsRouterInterface: AnyObject {
     func showSymbolDetails(symbol: String)
 }
 
 class SymbolsRouter: SymbolsRouterInterface {
-    private let navigationVC: UINavigationController
+    weak var navigationVC: UINavigationController?
+    private let factory: Factory<SymbolsDetailAssistedFactory>
 
-    init(navigationVC: UINavigationController, view: SymbolsListViewController) {
-        self.navigationVC = navigationVC
-        navigationVC.viewControllers = [view]
+    init(factory: Factory<SymbolsDetailAssistedFactory>) {
+        self.factory = factory
     }
 
     func showSymbolDetails(symbol: String) {
+        navigationVC?.pushViewController(factory.build(symbol), animated: true)
     }
 }
