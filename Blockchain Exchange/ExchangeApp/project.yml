@@ -7,6 +7,9 @@ packages:
   Cleanse:
     url: "https://github.com/square/Cleanse"
     majorVersion: 4.2.6
+  RxSwiftExt:
+    url: "https://github.com/RxSwiftCommunity/RxSwiftExt"
+    majorVersion: 6.1.0
 projectReferences:
   ExchangeAPI:
     path: ../ExchangeAPI/ExchangeAPI.xcodeproj
@@ -22,6 +25,7 @@ targets:
       - target: ExchangeServices/ExchangeServices
       - target: ExchangeAPI/ExchangeAPI
       - package: Cleanse
+      - package: RxSwiftExt
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery

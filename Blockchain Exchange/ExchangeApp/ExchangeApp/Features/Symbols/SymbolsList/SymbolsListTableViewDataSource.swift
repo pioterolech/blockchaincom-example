@@ -27,7 +27,7 @@ final class SymbolsListTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         var config = cell.defaultContentConfiguration()
-        config.text = "Hello, world"
+        config.text = dataRelay.value[indexPath.row]
         cell.contentConfiguration = config
         return cell
     }

@@ -16,7 +16,7 @@ public protocol ExchangeSymbolsServiceInterface {
 public final class ExchangeSymbolsService: ExchangeSymbolsServiceInterface {
     private let apiClient: ExchangeAPIInterface
 
-    init(apiClient: ExchangeAPIInterface) {
+    public init(apiClient: ExchangeAPIInterface) {
         self.apiClient = apiClient
     }
 

@@ -7,21 +7,21 @@
 
 import Foundation
 
-typealias TaskCompletion = (Data?, URLResponse?, Error?) -> Void
+public typealias TaskCompletion = (Data?, URLResponse?, Error?) -> Void
 
-protocol URLSessionInterface {
+public protocol URLSessionInterface {
     func createDataTask(with request: URLRequest,
                         completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface
 }
 
-protocol URLSessionDataTaskInterface {
+public protocol URLSessionDataTaskInterface {
     func resume()
     func cancel()
 }
 
 extension URLSessionDataTask: URLSessionDataTaskInterface { }
 extension URLSession: URLSessionInterface {
-    func createDataTask(with request: URLRequest,
+    public func createDataTask(with request: URLRequest,
                         completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface {
         dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTaskInterface
     }

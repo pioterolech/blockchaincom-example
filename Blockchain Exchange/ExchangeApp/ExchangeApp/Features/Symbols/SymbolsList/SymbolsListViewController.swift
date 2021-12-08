@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
-class SymbolsListViewController: UIViewController, UITableViewDelegate {
-    private let tableView: UITableView
-    private let dataSource: SymbolsListTableViewDataSource
+final class SymbolsListViewController: UIViewController, UITableViewDelegate {
+    private(set) var tableView: UITableView
+    private(set) var dataSource: SymbolsListTableViewDataSource
+    private let presenter: SymbolsListPresenterInterface
+    private let disposeBag: DisposeBag = .init()
 
-    init(tableView: UITableView, dataSource: SymbolsListTableViewDataSource) {
+    init(tableView: UITableView,
+         dataSource: SymbolsListTableViewDataSource,
+         presenter: SymbolsListPresenterInterface) {
         self.tableView = tableView
         self.dataSource = dataSource
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -31,6 +38,23 @@ class SymbolsListViewController: UIViewController, UITableViewDelegate {
         title = "Symbol view"
 
         view.addSubviewAndFill(tableView)
-        tableView.reloadData()
+
+        setupBindings()
+        presenter.input.accept(SymbolsListPresenterInput.FetchSymbols())
+    }
+
+    private func setupBindings() {
+        let success = presenter.output.compactMap { $0 as? SymbolsListPresenterOutput.SymbolsFetchSuccess }
+        success.map { $0.symbols }.drive(rx.reloadData).disposed(by: disposeBag)
+    }
+}
+
+extension Reactive where Base: SymbolsListViewController {
+
+    var reloadData: Binder<[String]> {
+        return Binder(self.base) { view, data in
+            view.dataSource.dataRelay.accept(data)
+            view.tableView.reloadData()
+        }
     }
 }

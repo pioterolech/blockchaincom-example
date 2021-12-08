@@ -9,7 +9,7 @@ public final class ExchangeAPI: ExchangeAPIInterface {
     private let engine: HttpEngingeInterface
     private let urlFactory: URLFactory
 
-    init(engine: HttpEngingeInterface, urlFactory: URLFactory) {
+    public init(engine: HttpEngingeInterface, urlFactory: URLFactory) {
         self.engine = engine
         self.urlFactory = urlFactory
     }

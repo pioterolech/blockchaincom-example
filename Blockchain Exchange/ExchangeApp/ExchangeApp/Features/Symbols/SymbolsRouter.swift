@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol SymbolsRouterInterface {
+protocol SymbolsRouterInterface: AnyObject {
     func showSymbolDetails(symbol: String)
 }
 

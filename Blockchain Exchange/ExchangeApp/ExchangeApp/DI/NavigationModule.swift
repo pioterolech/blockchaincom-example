@@ -18,10 +18,10 @@ struct NavigationModule: Cleanse.Module {
         binder
           .bind(UINavigationController.self)
           .tagged(with: RootViewTag.self)
-          .to(factory: { (symbolsList: SymbolsListViewController) -> UINavigationController in
-              let mainNavigation = UINavigationController()
-              mainNavigation.viewControllers = [symbolsList]
-              return mainNavigation
+          .to(factory: { (symbolsVC: SymbolsListViewController) -> UINavigationController in
+              let rootNav = UINavigationController()
+              rootNav.viewControllers = [symbolsVC]
+              return rootNav
           })
     }
 
