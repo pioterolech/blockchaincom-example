@@ -19,9 +19,18 @@ public struct URLFactory {
 
     struct Exchange {
         static let symbols = "/exchange/symbols"
+        static func prices(symbol: String) -> String {
+            let prefix = "nabu-gateway/markets/exchange/prices?symbol="
+            let suffix = "&start=1604423853088&end=1638983853088&granularity=86400"
+            return prefix+symbol+suffix
+        }
     }
 
     var symbols: String {
         Api.path + Api.version + Exchange.symbols
+    }
+
+    func prices(symbol: String) -> String {
+        Api.path + Exchange.prices(symbol: symbol)
     }
 }

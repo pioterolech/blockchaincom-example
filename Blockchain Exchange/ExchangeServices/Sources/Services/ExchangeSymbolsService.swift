@@ -11,6 +11,7 @@ import RxSwift
 
 public protocol ExchangeSymbolsServiceInterface {
     func symbols() -> Observable<[String]>
+    func prices(symbol: String) -> Observable<[[Double]]>
 }
 
 public final class ExchangeSymbolsService: ExchangeSymbolsServiceInterface {
@@ -22,5 +23,9 @@ public final class ExchangeSymbolsService: ExchangeSymbolsServiceInterface {
 
     public func symbols() -> Observable<[String]> {
         apiClient.symbols().map { Array($0.keys) }
+    }
+
+    public func prices(symbol: String) -> Observable<[[Double]]> {
+        apiClient.prices(symbol: symbol).map { $0.prices }
     }
 }

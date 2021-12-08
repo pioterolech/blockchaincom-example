@@ -8,6 +8,7 @@
 import Foundation
 import Cleanse
 import UIKit
+import Charts
 import ExchangeServices
 
 struct SymbolsDetailAssistedFactory: Cleanse.AssistedFactory {
@@ -25,10 +26,16 @@ struct SymbolDetailModule: Module {
             }
 
         binder
+            .bind(LineChartView.self)
+            .to {
+                return LineChartView()
+            }
+
+        binder
             .bindFactory(SymbolsDetailViewController.self)
             .with(SymbolsDetailAssistedFactory.self)
-            .to { (presenter: SymbolDetailViewPresenter, factory: Assisted<String>) in
-                return SymbolsDetailViewController(presenter: presenter, symbol: factory.get())
+            .to { (presenter: SymbolDetailViewPresenter, chartView: LineChartView, factory: Assisted<String>) in
+                return SymbolsDetailViewController(presenter: presenter, symbol: factory.get(), chartView: chartView)
             }
     }
 }

@@ -35,8 +35,9 @@ final class SymbolsListViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.rowHeight = 44
+        tableView.backgroundColor = .white
 
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         title = "Symbol view"
 
         view.addSubviewAndFill(tableView)

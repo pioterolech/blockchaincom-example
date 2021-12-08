@@ -30,8 +30,11 @@ final class SymbolsListTableViewDataSource: NSObject, UITableViewDataSource {
         }
 
         var config = cell.defaultContentConfiguration()
+
         config.text = dataRelay.value[indexPath.row]
+        cell.backgroundColor = .white
         cell.contentConfiguration = config
+
         return cell
     }
 }

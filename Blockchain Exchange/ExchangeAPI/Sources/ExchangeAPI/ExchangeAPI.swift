@@ -3,6 +3,7 @@ import Foundation
 
 public protocol ExchangeAPIInterface {
     func symbols() -> Observable<[String: SymbolsHttpEntity]>
+    func prices(symbol: String) -> Observable<PricesHttpEntity>
 }
 
 public final class ExchangeAPI: ExchangeAPIInterface {
@@ -16,5 +17,9 @@ public final class ExchangeAPI: ExchangeAPIInterface {
 
     public func symbols() -> Observable<[String: SymbolsHttpEntity]> {
         engine.fetch(with: urlFactory.symbols)
+    }
+
+    public func prices(symbol: String) -> Observable<PricesHttpEntity> {
+        engine.fetch(with: urlFactory.prices(symbol: symbol))
     }
 }
