@@ -7,13 +7,16 @@
 
 import Foundation
 import Cleanse
+import UIKit
 
 struct SymbolsRouterModule: Module {
     static func configure(binder: Binder<Unscoped>) {
-//        binder
-//            .bind(SymbolsRouter.self)
-//            .to { (rootNavProvider: TaggedProvider<NavigationModule.RootViewTag>) in
-//                SymbolsRouter(navigationVC: rootNavProvider.get())
-//            }
+        binder
+            .bind(SymbolsRouter.self)
+            .to { (navigation: UINavigationController, view: SymbolsListViewController, presenter: SymbolsListPresenter) -> SymbolsRouter in
+                let router = SymbolsRouter(navigationVC: navigation, view: view)
+                presenter.router = router
+                return router
+            }
     }
 }

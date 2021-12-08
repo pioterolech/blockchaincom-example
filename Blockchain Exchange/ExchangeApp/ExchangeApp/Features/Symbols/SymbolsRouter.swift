@@ -15,8 +15,9 @@ protocol SymbolsRouterInterface: AnyObject {
 class SymbolsRouter: SymbolsRouterInterface {
     private let navigationVC: UINavigationController
 
-    init(navigationVC: UINavigationController) {
+    init(navigationVC: UINavigationController, view: SymbolsListViewController) {
         self.navigationVC = navigationVC
+        navigationVC.viewControllers = [view]
     }
 
     func showSymbolDetails(symbol: String) {

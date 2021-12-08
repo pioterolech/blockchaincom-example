@@ -10,19 +10,12 @@ import Cleanse
 import UIKit
 
 struct NavigationModule: Cleanse.Module {
-    struct RootViewTag: Tag {
-        typealias Element = UINavigationController
-    }
-
-    static func configure(binder: Binder<Unscoped>) {
+    static func configure(binder: Binder<Singleton>) {
         binder
           .bind(UINavigationController.self)
-          .tagged(with: RootViewTag.self)
-          .to(factory: { (symbolsVC: SymbolsListViewController) -> UINavigationController in
-              let rootNav = UINavigationController()
-              rootNav.viewControllers = [symbolsVC]
-              return rootNav
+          .sharedInScope()
+          .to(factory: { () -> UINavigationController in
+              return UINavigationController()
           })
     }
-
 }

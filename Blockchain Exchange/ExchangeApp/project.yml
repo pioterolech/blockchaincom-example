@@ -10,6 +10,9 @@ packages:
   RxSwiftExt:
     url: "https://github.com/RxSwiftCommunity/RxSwiftExt"
     majorVersion: 6.1.0
+  NVActivityIndicatorView:
+    url: "https://github.com/ninjaprox/NVActivityIndicatorView"
+    majorVersion: 5.1.1
 projectReferences:
   ExchangeAPI:
     path: ../ExchangeAPI/ExchangeAPI.xcodeproj
@@ -26,6 +29,7 @@ targets:
       - target: ExchangeAPI/ExchangeAPI
       - package: Cleanse
       - package: RxSwiftExt
+      - package: NVActivityIndicatorView
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery

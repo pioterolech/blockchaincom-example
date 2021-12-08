@@ -13,9 +13,7 @@ struct ExchangeAPIModule: Module {
     static func configure(binder: Binder<Singleton>) {
         binder
             .bind(HttpEngingeInterface.self)
-            .to {
-                return HttpEngine(urlSession: URLSession.shared, decoder: .init())
-            }
+            .to { HttpEngine(urlSession: URLSession.shared, decoder: .init()) }
 
         binder
             .bind(URLFactory.self)
@@ -24,7 +22,7 @@ struct ExchangeAPIModule: Module {
         binder
             .bind(ExchangeAPIInterface.self)
             .to { (engine: HttpEngingeInterface, urlFactory: URLFactory) in
-                return ExchangeAPI(engine: engine, urlFactory: urlFactory)
+                ExchangeAPI(engine: engine, urlFactory: urlFactory)
             }
     }
 }

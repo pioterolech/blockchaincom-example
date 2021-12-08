@@ -15,14 +15,14 @@ struct SymbolsListModule: Module {
         binder
             .bind(SymbolsListPresenter.self)
             .to { (service: ExchangeSymbolsService) in
-                SymbolsListPresenter(symbolsService: service)
+                return SymbolsListPresenter(symbolsService: service)
             }
 
         binder
             .bind(SymbolsListViewController.self)
             .to { (presenter: SymbolsListPresenter) in
                 let tableView = UITableView()
-                let dataSource = SymbolsListTableViewDataSource(dataRelay: .init(value: ["String1", "String2"]))
+                let dataSource = SymbolsListTableViewDataSource(dataRelay: .init(value: []))
                 return SymbolsListViewController(tableView: tableView, dataSource: dataSource, presenter: presenter)
             }
     }

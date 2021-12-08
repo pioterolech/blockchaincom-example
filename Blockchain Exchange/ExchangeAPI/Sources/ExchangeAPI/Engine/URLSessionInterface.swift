@@ -22,7 +22,7 @@ public protocol URLSessionDataTaskInterface {
 extension URLSessionDataTask: URLSessionDataTaskInterface { }
 extension URLSession: URLSessionInterface {
     public func createDataTask(with request: URLRequest,
-                        completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface {
+                               completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface {
         dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTaskInterface
     }
 }
