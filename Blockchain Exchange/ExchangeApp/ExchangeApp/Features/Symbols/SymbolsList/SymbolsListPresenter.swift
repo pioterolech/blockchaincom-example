@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ExchangeServices
+import ExchangeSymbolsRepository
 import RxSwift
 import RxSwiftExt
 import RxCocoa
@@ -22,11 +22,11 @@ final class SymbolsListPresenter: SymbolsListPresenterInterface {
     }
 
     private let disposeBag = DisposeBag()
-    private let symbolsService: ExchangeSymbolsServiceInterface
+    private let symbolsService: ExchangeSymbolsRepositoryInterface
     private var driverRelay: PublishRelay<SymbolsListPresenterOutputInterface>
     private var currentElements: BehaviorRelay<[String]>
 
-    init(symbolsService: ExchangeSymbolsServiceInterface) {
+    init(symbolsService: ExchangeSymbolsRepositoryInterface) {
         self.symbolsService = symbolsService
         self.input = .init()
         self.driverRelay = .init()

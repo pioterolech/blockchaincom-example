@@ -15,8 +15,9 @@ struct ExchangeLocalDataSourceModule: Module {
         binder
             .bind(LocalStorageEngine.self)
             .to {
-                let dispatchQueue = DispatchQueue(label: "com.navia.localstoragequeue")
-                let serialScheduler = SerialDispatchQueueScheduler(queue: dispatchQueue, internalSerialQueueName: "com.navia.localstoragequeue")
+                let queueName = "com.navia.localstoragequeue"
+                let dispatchQueue = DispatchQueue(label: queueName)
+                let serialScheduler = SerialDispatchQueueScheduler(queue: dispatchQueue, internalSerialQueueName: queueName)
                 return LocalStorageEngine(serialScheduler: serialScheduler, fileManager: .default, jsonEncoder: JSONEncoder(), jsonDecoder: JSONDecoder())
             }
 

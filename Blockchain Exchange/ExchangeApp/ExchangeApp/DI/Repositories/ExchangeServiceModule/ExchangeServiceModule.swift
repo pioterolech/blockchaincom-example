@@ -7,12 +7,12 @@
 
 import Foundation
 import Reachability
-import ExchangeServices
+import ExchangeSymbolsRepository
 import ExchangeLocalDataSource
 import ExchangeRemoteDataSource
 import Cleanse
 
-struct ExchangeServiceModule: Module {
+struct ExchangeRepositoryModule: Module {
     static func configure(binder: Binder<Singleton>) {
 
         binder.bind(Reachability.self)
@@ -27,10 +27,10 @@ struct ExchangeServiceModule: Module {
             }
 
         binder
-            .bind(ExchangeSymbolsService.self)
+            .bind(ExchangeSymbolsRepository.self)
             .to { (apiClient: ExchangeRemoteDataSourceInterface, localDataSource: ExchangeLocalDataSource, networkInfo: NetworkInfo) in
 
-                return ExchangeSymbolsService(apiClient: apiClient,
+                return ExchangeSymbolsRepository(apiClient: apiClient,
                                               localDataSource: localDataSource, networkInfo: networkInfo)
             }
     }

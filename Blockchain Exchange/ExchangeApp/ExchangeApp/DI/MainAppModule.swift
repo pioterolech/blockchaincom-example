@@ -24,7 +24,7 @@ struct MainComponent: Cleanse.RootComponent {
         binder.include(module: SymbolsRouterModule.self)
         binder.include(module: ExchangeLocalDataSourceModule.self)
         binder.include(module: ExchangeRemoteDataSourceModule.self)
-        binder.include(module: ExchangeServiceModule.self)
+        binder.include(module: ExchangeRepositoryModule.self)
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

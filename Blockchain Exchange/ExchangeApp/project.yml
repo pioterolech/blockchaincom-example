@@ -19,8 +19,8 @@ packages:
 projectReferences:
   ExchangeRemoteDataSource:
     path: ../ExchangeRemoteDataSource/ExchangeRemoteDataSource.xcodeproj
-  ExchangeServices:
-    path: ../ExchangeServices/ExchangeServices.xcodeproj
+  ExchangeSymbolsRepository:
+    path: ../ExchangeSymbolsRepository/ExchangeSymbolsRepository.xcodeproj
 targets:
   ExchangeApp:
     type: application
@@ -28,7 +28,7 @@ targets:
     sources:
       - path: ExchangeApp
     dependencies:
-      - target: ExchangeServices/ExchangeServices
+      - target: ExchangeSymbolsRepository/ExchangeSymbolsRepository
       - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
       - package: Cleanse
       - package: Charts

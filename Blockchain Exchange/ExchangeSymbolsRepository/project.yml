@@ -1,4 +1,4 @@
-name: ExchangeServices
+name: ExchangeSymbolsRepository
 options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
@@ -16,7 +16,7 @@ projectReferences:
   ExchangeLocalDataSource:
     path: ../ExchangeLocalDataSource/ExchangeLocalDataSource.xcodeproj
 targets:
-  ExchangeServices:
+  ExchangeSymbolsRepository:
     type: framework
     platform: iOS
     sources:
@@ -31,7 +31,7 @@ targets:
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery
-  ExchangeServicesTests:
+  ExchangeSymbolsRepositoryTests:
     type: bundle.unit-test
     platform: iOS
     sources:
@@ -40,20 +40,20 @@ targets:
       - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
         codeSign: false
 schemes:
-  ExchangeServices:
+  ExchangeSymbolsRepository:
     build:
       targets:
-        ExchangeServices: all
+        ExchangeSymbolsRepository: all
     test:
       targets: 
-        - ExchangeServices 
-  ExchangeServicesTests:
+        - ExchangeSymbolsRepository 
+  ExchangeSymbolsRepositoryTests:
     build:
       targets:
-        ExchangeServicesTests: all
+        ExchangeSymbolsRepositoryTests: all
     test:
       gatherCoverageData: true
       coverageTargets:
-        - ExchangeServices
+        - ExchangeSymbolsRepository
       targets: 
-        - ExchangeServicesTests 
+        - ExchangeSymbolsRepositoryTests 

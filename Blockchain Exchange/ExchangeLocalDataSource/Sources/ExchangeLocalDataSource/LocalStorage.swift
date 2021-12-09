@@ -20,5 +20,4 @@ public final class ExchangeLocalDataSource: ExchangeLocalDataSourceInterface {
     public func getSymbols() -> Observable<SymbolsDataSourceEntity> {
         return engine.getData(identifier: "symbolsIndentifier")
     }
-
 }

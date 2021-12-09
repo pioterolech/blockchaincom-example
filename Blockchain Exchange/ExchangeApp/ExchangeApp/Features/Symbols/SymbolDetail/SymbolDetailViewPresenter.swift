@@ -8,7 +8,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import ExchangeServices
+import ExchangeSymbolsRepository
 import Charts
 
 final class SymbolDetailViewPresenter: SymbolDetailViewPresenterInterface {
@@ -21,10 +21,10 @@ final class SymbolDetailViewPresenter: SymbolDetailViewPresenterInterface {
     }
 
     private let disposeBag = DisposeBag()
-    private let symbolsService: ExchangeSymbolsServiceInterface
+    private let symbolsService: ExchangeSymbolsRepositoryInterface
     private var driverRelay: PublishRelay<SymbolDetailViewPresenterOutputInterface>
 
-    init(symbolsService: ExchangeSymbolsServiceInterface) {
+    init(symbolsService: ExchangeSymbolsRepositoryInterface) {
         self.symbolsService = symbolsService
         self.input = .init()
         self.driverRelay = .init()

@@ -10,12 +10,12 @@ import ExchangeLocalDataSource
 import Foundation
 import RxSwift
 
-public protocol ExchangeSymbolsServiceInterface {
+public protocol ExchangeSymbolsRepositoryInterface {
     func symbols() -> Observable<[String]>
     func prices(symbol: String) -> Observable<[[Double]]>
 }
 
-public final class ExchangeSymbolsService: ExchangeSymbolsServiceInterface {
+public final class ExchangeSymbolsRepository: ExchangeSymbolsRepositoryInterface {
     private let apiClient: ExchangeRemoteDataSourceInterface
     private let localDataSource: ExchangeLocalDataSource
     private let networkInfo: NetworkInfoInterface

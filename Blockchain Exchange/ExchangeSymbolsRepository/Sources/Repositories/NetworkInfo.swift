@@ -17,17 +17,6 @@ public class NetworkInfo: NetworkInfoInterface {
 
     public init(reachability: Reachability) {
         self.reachability = reachability
-
-        reachability.whenReachable = { reachability in
-            if reachability.connection == .wifi {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-            }
-        }
-        reachability.whenUnreachable = { _ in
-            print("Not reachable")
-        }
     }
 
     public var isReachable: Bool {

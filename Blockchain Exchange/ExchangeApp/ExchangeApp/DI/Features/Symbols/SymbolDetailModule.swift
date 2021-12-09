@@ -9,7 +9,7 @@ import Foundation
 import Cleanse
 import UIKit
 import Charts
-import ExchangeServices
+import ExchangeSymbolsRepository
 
 struct SymbolsDetailAssistedFactory: Cleanse.AssistedFactory {
     typealias Seed = String
@@ -21,7 +21,7 @@ struct SymbolDetailModule: Module {
 
         binder
             .bind(SymbolDetailViewPresenter.self)
-            .to { (service: ExchangeSymbolsService) in
+            .to { (service: ExchangeSymbolsRepository) in
                 return SymbolDetailViewPresenter(symbolsService: service)
             }
 

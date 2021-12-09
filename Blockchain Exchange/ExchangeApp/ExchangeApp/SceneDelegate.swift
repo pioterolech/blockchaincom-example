@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             componentFactoryInjector?.injectProperties(into: self)
             window?.makeKeyAndVisible()
         } catch {
-            assertionFailure("Unable to load app dependencies :\(error)")
+            assertionFailure("unable to load app dependencies :\(error)")
         }
     }
 }

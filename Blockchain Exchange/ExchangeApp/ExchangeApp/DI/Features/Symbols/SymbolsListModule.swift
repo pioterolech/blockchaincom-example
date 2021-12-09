@@ -8,13 +8,13 @@
 import Foundation
 import Cleanse
 import UIKit
-import ExchangeServices
+import ExchangeSymbolsRepository
 
 struct SymbolsListModule: Module {
     static func configure(binder: Binder<Unscoped>) {
         binder
             .bind(SymbolsListPresenter.self)
-            .to { (service: ExchangeSymbolsService, router: SymbolsRouter) in
+            .to { (service: ExchangeSymbolsRepository, router: SymbolsRouter) in
                 let presenter = SymbolsListPresenter(symbolsService: service)
                 presenter.router = router
                 return presenter
