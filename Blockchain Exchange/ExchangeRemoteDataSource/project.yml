@@ -30,10 +30,10 @@ targets:
     dependencies:
       - target: ExchangeRemoteDataSource
         codeSign: false
-      # - package: RxSwift 
-      #   product: RxTest
-      # - package: RxSwift 
-      #   product: RxCocoa
+#      - package: RxSwift
+#        product: RxTest
+#      - package: RxSwift
+#        product: RxCocoa
   ExchangeRemoteDataSourceIntegrationTests:
     type: bundle.unit-test
     platform: iOS
@@ -42,8 +42,8 @@ targets:
     dependencies:
       - target: ExchangeRemoteDataSource
         codeSign: false
-      # - package: RxSwift
-      #   product: RxBlocking
+#      - package: RxSwift
+#        product: RxBlocking
 schemes:
   ExchangeRemoteDataSource:
     build:

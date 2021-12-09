@@ -5,7 +5,7 @@
 //  Created by Piotr Olechnowicz on 03/12/2021.
 //
 
-@testable import ExchangeAPI
+@testable import ExchangeRemoteDataSource
 import Foundation
 
 class URLSessionMock: URLSessionInterface {

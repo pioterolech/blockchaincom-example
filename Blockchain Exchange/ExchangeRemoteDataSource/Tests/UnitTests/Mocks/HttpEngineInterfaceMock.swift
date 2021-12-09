@@ -1,5 +1,5 @@
 import RxSwift
-@testable import ExchangeAPI
+@testable import ExchangeRemoteDataSource
 
 class HttpEngineMock: HttpEngingeInterface {
 

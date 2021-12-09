@@ -34,6 +34,9 @@
     ExchangeSymbolsRepository - business logic layer, coordinates work between datasources
     ExchangeApp - main app module with presentation layer
 
+## TDD:
+    ExchangeRemoteDataSource is the only module that contains unit and integration tests
+    There was no time to provide more tested code but all classes are testable.
 
 ## Simplified architecture diagram: 
 ![Screenshot](simplified-diagram.png)
@@ -47,8 +50,11 @@
     
 ## Ideas for improvment: 
     - should be one more UseCases module/layer as an app will grow in complexity
-    - RxSwift, Cleanse is a quite fat third party dependency across modules
+    - RxSwift, Cleanse are quite fat third party dependency across modules
     - NetworkInfo should be separate datasource module
     - some error handling code in presenters is not implemented
     - no fastline/ci
-    
+    - use carthage+rome for better framework managment
+
+## Known issues:
+    - There might be a crash in unit tests, related to SPM embeding two RxSwift framework to test budnle

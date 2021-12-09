@@ -1,14 +1,14 @@
 import XCTest
 import RxBlocking
-@testable import ExchangeAPI
+@testable import ExchangeRemoteDataSource
 
 final class ExchangeAPITests: XCTestCase {
-    private var sut: ExchangeAPI!
+    private var sut: ExchangeRemoteDataSource!
 
     override func setUp() {
         let engine = HttpEngine(urlSession: URLSession.shared, decoder: .init())
         let urlFactory = URLFactory()
-        sut = ExchangeAPI(engine: engine, urlFactory: urlFactory)
+        sut = ExchangeRemoteDataSource(engine: engine, urlFactory: urlFactory)
     }
 
     func test_symbolsIntegrationTests() throws {

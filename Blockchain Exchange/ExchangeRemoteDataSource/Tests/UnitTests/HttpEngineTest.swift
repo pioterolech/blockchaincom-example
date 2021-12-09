@@ -10,7 +10,7 @@ import RxTest
 import RxSwift
 import RxCocoa
 import Foundation
-@testable import ExchangeAPI
+@testable import ExchangeRemoteDataSource
 
 class HttpEngineTest: RxTestCase {
     private var sut: HttpEngine!
