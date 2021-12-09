@@ -1,1 +1,4 @@
-# Blockchain.com MVVM+Rx client example.
+# Blockchain.com clean architecture client.
+
+![Screenshot](simplified-diagram.png)
+
