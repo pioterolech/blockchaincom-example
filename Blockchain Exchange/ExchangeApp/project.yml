@@ -17,8 +17,8 @@ packages:
     url: "https://github.com/danielgindi/Charts"
     majorVersion: 4.0.1
 projectReferences:
-  ExchangeAPI:
-    path: ../ExchangeAPI/ExchangeAPI.xcodeproj
+  ExchangeRemoteDataSource:
+    path: ../ExchangeRemoteDataSource/ExchangeRemoteDataSource.xcodeproj
   ExchangeServices:
     path: ../ExchangeServices/ExchangeServices.xcodeproj
 targets:
@@ -29,14 +29,14 @@ targets:
       - path: ExchangeApp
     dependencies:
       - target: ExchangeServices/ExchangeServices
-      - target: ExchangeAPI/ExchangeAPI
+      - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
       - package: Cleanse
       - package: Charts
       - package: RxSwiftExt
       - package: NVActivityIndicatorView
-    preBuildScripts:
-      - path: ../Scripts/preBuildScript.sh
-        name: Swiftlint, Sourcery
+    # preBuildScripts:
+    #   - path: ../Scripts/preBuildScript.sh
+    #     name: Swiftlint, Sourcery
   ExchangeAppUnitTests:
     type: bundle.unit-test
     platform: iOS

@@ -3,9 +3,18 @@ options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
+packages:
+  RxSwift:
+    url: "https://github.com/ReactiveX/RxSwift"
+    majorVersion: 6.2.0
+  Reachability:
+    url: "https://github.com/ashleymills/Reachability.swift"
+    majorVersion: 5.1.0
 projectReferences:
-  ExchangeAPI:
-    path: ../ExchangeAPI/ExchangeAPI.xcodeproj
+  ExchangeRemoteDataSource:
+    path: ../ExchangeRemoteDataSource/ExchangeRemoteDataSource.xcodeproj
+  ExchangeLocalDataSource:
+    path: ../ExchangeLocalDataSource/ExchangeLocalDataSource.xcodeproj
 targets:
   ExchangeServices:
     type: framework
@@ -13,7 +22,12 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - target: ExchangeAPI/ExchangeAPI
+      - package: RxSwift
+      - package: Reachability
+      - package: RxSwift 
+        product: RxCocoa
+      - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
+      - target: ExchangeLocalDataSource/ExchangeLocalDataSource
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery
@@ -23,7 +37,7 @@ targets:
     sources:
       - path: Tests
     dependencies:
-      - target: ExchangeAPI/ExchangeAPI
+      - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
         codeSign: false
 schemes:
   ExchangeServices:

@@ -22,7 +22,8 @@ struct MainComponent: Cleanse.RootComponent {
         binder.include(module: SymbolDetailModule.self)
         binder.include(module: SymbolsListModule.self)
         binder.include(module: SymbolsRouterModule.self)
-        binder.include(module: ExchangeAPIModule.self)
+        binder.include(module: ExchangeLocalDataSourceModule.self)
+        binder.include(module: ExchangeRemoteDataSourceModule.self)
         binder.include(module: ExchangeServiceModule.self)
     }
 

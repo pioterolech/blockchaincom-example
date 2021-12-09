@@ -1,0 +1,50 @@
+name: ExchangeLocalDataSource
+options:
+  bundleIdPrefix: com.navia.framework
+  deploymentTarget:
+    iOS: 15
+packages:
+  RxSwift:
+    url: "https://github.com/ReactiveX/RxSwift"
+    majorVersion: 6.2.0
+targets:
+  ExchangeLocalDataSource:
+    type: framework
+    platform: iOS
+    sources:
+      - path: Sources
+    dependencies:
+      - package: RxSwift
+        implicit: true
+      - package: RxSwift 
+        product: RxCocoa
+        implicit: true
+    preBuildScripts:
+      - path: ../Scripts/preBuildScript.sh
+        name: Swiftlint, Sourcery
+  ExchangeLocalDataSourceTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/UnitTests
+    dependencies:
+      - target: ExchangeLocalDataSource
+        codeSign: false
+schemes:
+  ExchangeLocalDataSource:
+    build:
+      targets:
+        ExchangeLocalDataSource: all
+    test:
+      targets: 
+        - ExchangeLocalDataSourceTests 
+  ExchangeLocalDataSourceTests:
+    build:
+      targets:
+        ExchangeLocalDataSourceTests: all
+    test:
+      gatherCoverageData: true
+      coverageTargets:
+        - ExchangeLocalDataSource
+      targets: 
+        - ExchangeLocalDataSourceTests 

@@ -1,12 +1,12 @@
 import RxSwift
 import Foundation
 
-public protocol ExchangeAPIInterface {
+public protocol ExchangeRemoteDataSourceInterface {
     func symbols() -> Observable<[String: SymbolsHttpEntity]>
     func prices(symbol: String) -> Observable<PricesHttpEntity>
 }
 
-public final class ExchangeAPI: ExchangeAPIInterface {
+public final class ExchangeRemoteDataSource: ExchangeRemoteDataSourceInterface {
     private let engine: HttpEngingeInterface
     private let urlFactory: URLFactory
 

@@ -1,4 +1,4 @@
-name: ExchangeAPI
+name: ExchangeRemoteDataSource
 options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
@@ -8,62 +8,64 @@ packages:
     url: "https://github.com/ReactiveX/RxSwift"
     majorVersion: 6.2.0
 targets:
-  ExchangeAPI:
+  ExchangeRemoteDataSource:
     type: framework
     platform: iOS
     sources:
       - path: Sources
     dependencies:
       - package: RxSwift
+        implicit: true
       - package: RxSwift 
         product: RxCocoa
+        implicit: true
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery
-  ExchangeAPITests:
+  ExchangeRemoteDataSourceTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests/UnitTests
     dependencies:
-      - target: ExchangeAPI
+      - target: ExchangeRemoteDataSource
         codeSign: false
-      - package: RxSwift 
-        product: RxTest
-      - package: RxSwift 
-        product: RxCocoa
-  ExchangeAPIIntegrationTests:
+      # - package: RxSwift 
+      #   product: RxTest
+      # - package: RxSwift 
+      #   product: RxCocoa
+  ExchangeRemoteDataSourceIntegrationTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests/IntegrationTests
     dependencies:
-      - target: ExchangeAPI
+      - target: ExchangeRemoteDataSource
         codeSign: false
-      - package: RxSwift
-        product: RxBlocking
+      # - package: RxSwift
+      #   product: RxBlocking
 schemes:
-  ExchangeAPI:
+  ExchangeRemoteDataSource:
     build:
       targets:
-        ExchangeAPI: all
+        ExchangeRemoteDataSource: all
     test:
       targets: 
-        - ExchangeAPITests 
-  ExchangeAPITests:
+        - ExchangeRemoteDataSourceTests 
+  ExchangeRemoteDataSourceTests:
     build:
       targets:
-        ExchangeAPITests: all
+        ExchangeRemoteDataSourceTests: all
     test:
       gatherCoverageData: true
       coverageTargets:
-        - ExchangeAPI
+        - ExchangeRemoteDataSource
       targets: 
-        - ExchangeAPITests 
-  ExchangeAPIIntegrationTests:
+        - ExchangeRemoteDataSourceTests 
+  ExchangeRemoteDataSourceIntegrationTests:
     build:
       targets:
-        ExchangeAPIIntegrationTests: all
+        ExchangeRemoteDataSourceIntegrationTests: all
     test:
       targets: 
-        - ExchangeAPIIntegrationTests 
+        - ExchangeRemoteDataSourceIntegrationTests 

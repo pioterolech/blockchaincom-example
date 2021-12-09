@@ -7,9 +7,9 @@
 
 import Foundation
 import Cleanse
-import ExchangeAPI
+import ExchangeRemoteDataSource
 
-struct ExchangeAPIModule: Module {
+struct ExchangeRemoteDataSourceModule: Module {
     static func configure(binder: Binder<Singleton>) {
         binder
             .bind(HttpEngingeInterface.self)
@@ -20,9 +20,9 @@ struct ExchangeAPIModule: Module {
             .to { URLFactory.create() }
 
         binder
-            .bind(ExchangeAPIInterface.self)
+            .bind(ExchangeRemoteDataSourceInterface.self)
             .to { (engine: HttpEngingeInterface, urlFactory: URLFactory) in
-                ExchangeAPI(engine: engine, urlFactory: urlFactory)
+                ExchangeRemoteDataSource(engine: engine, urlFactory: urlFactory)
             }
     }
 }

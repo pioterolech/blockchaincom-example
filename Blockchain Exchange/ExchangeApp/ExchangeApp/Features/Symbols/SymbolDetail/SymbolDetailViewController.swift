@@ -57,9 +57,8 @@ final class SymbolsDetailViewController: UIViewController {
 private extension SymbolsDetailViewController {
     var reloadChartData: Binder<SymbolDetailViewPresenterOutput.PricesFetchSuccess> {
         return Binder(self) { view, eventData in
-            if eventData.chartData.count > 0 {
-                view.chartView.data = eventData.chartData
-            }
+            view.chartView.data = eventData.chartData
+//            view.chartView.animate(xAxisDuration: 1)
         }
     }
 }
