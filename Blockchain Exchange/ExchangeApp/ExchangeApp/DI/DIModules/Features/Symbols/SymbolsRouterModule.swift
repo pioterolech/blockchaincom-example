@@ -16,7 +16,8 @@ struct SymbolsRouterModule: Module {
             .bind(SymbolsRouter.self)
             .sharedInScope()
             .to { (factory: Factory<SymbolsDetailAssistedFactory>) -> SymbolsRouter in
-                return SymbolsRouter(factory: factory)
+                let detailsFactory = SymbolsDetailFactory(factory: factory)
+                return SymbolsRouter(detailsFactory: detailsFactory)
             }
     }
 }

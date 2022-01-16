@@ -1,9 +1,9 @@
-import RxSwift
 import Foundation
+import Combine
 
 public protocol ExchangeRemoteDataSourceInterface {
-    func symbols() -> Observable<[String: SymbolsHttpEntity]>
-    func prices(symbol: String) -> Observable<PricesHttpEntity>
+    func symbols() -> AnyPublisher<[String: SymbolsHttpEntity], HttpEngineError>
+    func prices(symbol: String) -> AnyPublisher<PricesHttpEntity, HttpEngineError>
 }
 
 public final class ExchangeRemoteDataSource: ExchangeRemoteDataSourceInterface {
@@ -15,11 +15,11 @@ public final class ExchangeRemoteDataSource: ExchangeRemoteDataSourceInterface {
         self.urlFactory = urlFactory
     }
 
-    public func symbols() -> Observable<[String: SymbolsHttpEntity]> {
+    public func symbols() -> AnyPublisher<[String: SymbolsHttpEntity], HttpEngineError> {
         engine.fetch(with: urlFactory.symbols)
     }
 
-    public func prices(symbol: String) -> Observable<PricesHttpEntity> {
+    public func prices(symbol: String) -> AnyPublisher<PricesHttpEntity, HttpEngineError> {
         engine.fetch(with: urlFactory.prices(symbol: symbol))
     }
 }

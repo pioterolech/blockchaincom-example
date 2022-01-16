@@ -7,25 +7,21 @@
 
 @testable import ExchangeRemoteDataSource
 import Foundation
+import Combine
 
 class URLSessionMock: URLSessionInterface {
 
-    var invokedCreateDataTask = false
-    var invokedCreateDataTaskCount = 0
-    var invokedCreateDataTaskParameters: (request: URLRequest, Void)?
-    var invokedCreateDataTaskParametersList = [(request: URLRequest, Void)]()
-    var stubbedCreateDataTaskCompletionHandlerResult: (Data?, URLResponse?, Error?)?
-    var stubbedCreateDataTaskResult: URLSessionDataTaskInterface!
+    var invokedFetch = false
+    var invokedFetchCount = 0
+    var invokedFetchParameters: (request: URLRequest, Void)?
+    var invokedFetchParametersList = [(request: URLRequest, Void)]()
+    var stubbedFetchResult: AnyPublisher<(data: Data, response: URLResponse), URLError>!
 
-    func createDataTask(with request: URLRequest,
-        completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface {
-        invokedCreateDataTask = true
-        invokedCreateDataTaskCount += 1
-        invokedCreateDataTaskParameters = (request, ())
-        invokedCreateDataTaskParametersList.append((request, ()))
-        if let result = stubbedCreateDataTaskCompletionHandlerResult {
-            completionHandler(result.0, result.1, result.2)
-        }
-        return stubbedCreateDataTaskResult
+    func fetch(for request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
+        invokedFetch = true
+        invokedFetchCount += 1
+        invokedFetchParameters = (request, ())
+        invokedFetchParametersList.append((request, ()))
+        return stubbedFetchResult
     }
 }

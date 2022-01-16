@@ -6,23 +6,14 @@
 //
 
 import Foundation
-
-public typealias TaskCompletion = (Data?, URLResponse?, Error?) -> Void
+import Combine
 
 public protocol URLSessionInterface {
-    func createDataTask(with request: URLRequest,
-                        completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface
+    func fetch(for request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), URLError>
 }
 
-public protocol URLSessionDataTaskInterface {
-    func resume()
-    func cancel()
-}
-
-extension URLSessionDataTask: URLSessionDataTaskInterface { }
 extension URLSession: URLSessionInterface {
-    public func createDataTask(with request: URLRequest,
-                               completionHandler: @escaping TaskCompletion) -> URLSessionDataTaskInterface {
-        dataTask(with: request, completionHandler: completionHandler) as URLSessionDataTaskInterface
+    public func fetch(for request: URLRequest) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
+        dataTaskPublisher(for: request).eraseToAnyPublisher()
     }
 }

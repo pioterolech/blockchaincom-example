@@ -3,13 +3,6 @@ options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
-packages:
-  RxSwift:
-    url: "https://github.com/ReactiveX/RxSwift"
-    majorVersion: 6.2.0
-  Reachability:
-    url: "https://github.com/ashleymills/Reachability.swift"
-    majorVersion: 5.1.0
 projectReferences:
   ExchangeRemoteDataSource:
     path: ../ExchangeRemoteDataSource/ExchangeRemoteDataSource.xcodeproj
@@ -22,10 +15,6 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - package: RxSwift
-      - package: Reachability
-      - package: RxSwift 
-        product: RxCocoa
       - target: ExchangeRemoteDataSource/ExchangeRemoteDataSource
       - target: ExchangeLocalDataSource/ExchangeLocalDataSource
     preBuildScripts:

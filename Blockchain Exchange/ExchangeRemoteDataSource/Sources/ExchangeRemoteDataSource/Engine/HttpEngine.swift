@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 
 public protocol HttpEngingeInterface {
-    func fetch<T: Codable>(with url: String) -> Observable<T>
+    func fetch<T: Codable>(with url: String) -> AnyPublisher<T, HttpEngineError>
 }
 
 public class HttpEngine: HttpEngingeInterface {
@@ -21,60 +21,51 @@ public class HttpEngine: HttpEngingeInterface {
         self.decoder = decoder
     }
 
-    public func fetch<T: Codable>(with url: String) -> Observable<T> {
-        fetch(with: url).decode(type: T.self, decoder: decoder)
+    public func fetch<T: Codable>(with url: String) -> AnyPublisher<T, HttpEngineError> {
+        combineFetch(with: url).tryMap { [unowned self] data in
+            try self.decoder.decode(T.self, from: data)
+        }
+        .mapError({ .enigneError($0) })
+        .eraseToAnyPublisher()
     }
 
-    private func fetch(with url: String) -> Observable<Data> {
-        Observable.create { [weak self] observer in
-            let task = self?.dataTask(with: url, observer: observer)
-            task?.resume()
-
-            return Disposables.create {
-                task?.cancel()
-            }
+    private func combineFetch(with url: String) -> AnyPublisher<Data, HttpEngineError> {
+        do {
+            let request = try URLRequest.create(from: url)
+            return urlSession.fetch(for: request)
+                             .tryMap { try HttpEngine.handleResponse(data: $0.data, response: $0.response) }
+                             .mapError({ .enigneError($0) })
+                             .eraseToAnyPublisher()
+        } catch {
+            return Fail(error: .enigneError(error)).eraseToAnyPublisher()
         }
     }
 
-    private func dataTask(with url: String, observer: AnyObserver<Data>) -> URLSessionDataTaskInterface? {
-        guard let url = URL(string: url) else {
-            observer.onError(HttpEngineErrors.invalidURL)
-            return nil
+    private static func handleResponse(data: Data, response: URLResponse) throws -> Data {
+        guard let response = (response as? HTTPURLResponse) else {
+            throw HttpEngineError.invalidResponse
         }
 
-        return urlSession.createDataTask(with: URLRequest(url: url)) { data, response, error in
-
-            // MARK: - Trasport error, timeout, connection refused etc.
-
-            if let error = error {
-                observer.onError(error)
-                return
-            }
-
-            guard let response = (response as? HTTPURLResponse) else {
-                observer.onError(HttpEngineErrors.invalidResponse)
-                return
-            }
-
-            guard response.isSuccess else {
-                observer.onError(HttpEngineErrors.error(for: response.statusCode))
-                return
-            }
-
-            guard let data = data else {
-                observer.onError(HttpEngineErrors.emptyResponse)
-                return
-            }
-
-            // MARK: - Success
-
-            observer.onNext(data)
+        guard response.isSuccess else {
+            throw HttpEngineError.error(for: response.statusCode)
         }
+
+        return data
     }
 }
 
 private extension HTTPURLResponse {
     var isSuccess: Bool {
         return (100...299).contains(statusCode)
+    }
+}
+
+private extension URLRequest {
+    static func create(from url: String) throws -> URLRequest {
+        guard let url = URL(string: url) else {
+            throw HttpEngineError.invalidURL(url)
+        }
+
+        return URLRequest(url: url)
     }
 }

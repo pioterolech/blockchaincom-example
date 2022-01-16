@@ -10,11 +10,10 @@ import Cleanse
 import UIKit
 
 struct MainComponent: Cleanse.RootComponent {
-
-    typealias Root = PropertyInjector<SceneDelegate>
+    typealias Root = PropertyInjector<AppFactory>
     typealias Scope = Singleton
     typealias Seed = UIWindowScene
-    typealias PropertyInjectorBinder  = PropertyInjectionReceiptBinder<SceneDelegate>
+    typealias PropertyInjectorBinder  = PropertyInjectionReceiptBinder<AppFactory>
 
     static func configure(binder: Binder<Singleton>) {
         binder.include(module: UIKitModule.self)
@@ -28,17 +27,11 @@ struct MainComponent: Cleanse.RootComponent {
     }
 
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
-        return bind.propertyInjector(configuredWith: MainComponent.configureAppDelegateInjector)
+        return bind.propertyInjector(configuredWith: MainComponent.configureUIWindowInjector)
     }
 
-    static func configureAppDelegateInjector(binder bind: PropertyInjectorBinder) -> BindingReceipt<Root> {
-        return bind.to(injector: SceneDelegate.injectProperties)
-    }
-}
-
-extension SceneDelegate {
-
-    func injectProperties(_ window: UIWindow) {
-        self.window = window
+    static func configureUIWindowInjector(binder bind: PropertyInjectorBinder) -> BindingReceipt<Root> {
+        return bind.to(injector: AppFactory.injectProperties)
     }
 }
+

@@ -21,6 +21,7 @@ struct SymbolsListPresenterInput {
 }
 
 struct SymbolsListPresenterOutput {
+    struct ViewInit: SymbolsListPresenterOutputInterface { }
     struct SymbolsFetchSuccess: SymbolsListPresenterOutputInterface { let symbols: [String] }
     struct SymbolsFetchFailed: SymbolsListPresenterOutputInterface { }
     struct InternalError: SymbolsListPresenterOutputInterface { let errorReason: String }

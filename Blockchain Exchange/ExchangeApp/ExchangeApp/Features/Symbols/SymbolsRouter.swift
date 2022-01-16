@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import Cleanse
 
 protocol SymbolsRouterInterface: AnyObject {
     func showSymbolDetails(symbol: String)
@@ -15,13 +14,13 @@ protocol SymbolsRouterInterface: AnyObject {
 
 class SymbolsRouter: SymbolsRouterInterface {
     weak var navigationVC: UINavigationController?
-    private let factory: Factory<SymbolsDetailAssistedFactory>
+    private let detailsFactory: SymbolsDetailFactory
 
-    init(factory: Factory<SymbolsDetailAssistedFactory>) {
-        self.factory = factory
+    init(detailsFactory: SymbolsDetailFactory) {
+        self.detailsFactory = detailsFactory
     }
 
     func showSymbolDetails(symbol: String) {
-        navigationVC?.pushViewController(factory.build(symbol), animated: true)
+        navigationVC?.pushViewController(detailsFactory.createSymbolsDetail(symbol: symbol), animated: true)
     }
 }

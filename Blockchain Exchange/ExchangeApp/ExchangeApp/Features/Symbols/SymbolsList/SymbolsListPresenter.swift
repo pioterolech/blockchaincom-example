@@ -23,13 +23,13 @@ final class SymbolsListPresenter: SymbolsListPresenterInterface {
 
     private let disposeBag = DisposeBag()
     private let symbolsService: ExchangeSymbolsRepositoryInterface
-    private var driverRelay: PublishRelay<SymbolsListPresenterOutputInterface>
+    private var driverRelay: BehaviorRelay<SymbolsListPresenterOutputInterface>
     private var currentElements: BehaviorRelay<[String]>
 
     init(symbolsService: ExchangeSymbolsRepositoryInterface) {
         self.symbolsService = symbolsService
         self.input = .init()
-        self.driverRelay = .init()
+        self.driverRelay = .init(value: Output.ViewInit())
         self.currentElements = .init(value: [])
 
         setupFetchBindings()
@@ -38,8 +38,8 @@ final class SymbolsListPresenter: SymbolsListPresenterInterface {
 
     private func setupFetchBindings() {
         let fetchSymbolsInput = input.filter { $0 is Input.FetchSymbols }
-        let fetchResult = fetchSymbolsInput.append(weak: self).flatMap { presenter, _ in
-            presenter.symbolsService.symbols().materialize()
+        let fetchResult = fetchSymbolsInput.flatMap { [unowned self] _ in
+            self.symbolsService.symbols().materialize()
         }.share()
 
         fetchResult.elements()
