@@ -5,7 +5,7 @@
 //  Created by Piotr Olechnowicz on 03/12/2021.
 //
 
-@testable import ExchangeRemoteDataSource
+@testable import ExchangeRemoteRepository
 import Foundation
 import Combine
 

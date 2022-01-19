@@ -1,4 +1,4 @@
-@testable import ExchangeRemoteDataSource
+@testable import ExchangeRemoteRepository
 import Combine
 
 class HttpEngineMock: HttpEngingeInterface {

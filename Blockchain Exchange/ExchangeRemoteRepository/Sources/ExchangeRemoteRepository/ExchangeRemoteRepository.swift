@@ -1,12 +1,12 @@
 import Foundation
 import Combine
 
-public protocol ExchangeRemoteDataSourceInterface {
+public protocol ExchangeRemoteRepositoryInterface {
     func symbols() -> AnyPublisher<[String: SymbolsHttpEntity], HttpEngineError>
     func prices(symbol: String) -> AnyPublisher<PricesHttpEntity, HttpEngineError>
 }
 
-public final class ExchangeRemoteDataSource: ExchangeRemoteDataSourceInterface {
+public final class ExchangeRemoteRepository: ExchangeRemoteRepositoryInterface {
     private let engine: HttpEngingeInterface
     private let urlFactory: URLFactory
 

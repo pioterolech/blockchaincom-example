@@ -1,10 +1,10 @@
-name: ExchangeRemoteDataSource
+name: ExchangeRemoteRepository
 options:
   bundleIdPrefix: com.navia.framework
   deploymentTarget:
     iOS: 15
 targets:
-  ExchangeRemoteDataSource:
+  ExchangeRemoteRepository:
     type: framework
     platform: iOS
     sources:
@@ -12,44 +12,44 @@ targets:
     preBuildScripts:
       - path: ../Scripts/preBuildScript.sh
         name: Swiftlint, Sourcery
-  ExchangeRemoteDataSourceTests:
+  ExchangeRemoteRepositoryTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests/UnitTests
     dependencies:
-      - target: ExchangeRemoteDataSource
+      - target: ExchangeRemoteRepository
         codeSign: false
-  ExchangeRemoteDataSourceIntegrationTests:
+  ExchangeRemoteRepositoryIntegrationTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: Tests/IntegrationTests
     dependencies:
-      - target: ExchangeRemoteDataSource
+      - target: ExchangeRemoteRepository
         codeSign: false
 schemes:
-  ExchangeRemoteDataSource:
+  ExchangeRemoteRepository:
     build:
       targets:
-        ExchangeRemoteDataSource: all
+        ExchangeRemoteRepository: all
     test:
       targets: 
-        - ExchangeRemoteDataSourceTests 
-  ExchangeRemoteDataSourceTests:
+        - ExchangeRemoteRepositoryTests 
+  ExchangeRemoteRepositoryTests:
     build:
       targets:
-        ExchangeRemoteDataSourceTests: all
+        ExchangeRemoteRepositoryTests: all
     test:
       gatherCoverageData: true
       coverageTargets:
-        - ExchangeRemoteDataSource
+        - ExchangeRemoteRepository
       targets: 
-        - ExchangeRemoteDataSourceTests 
-  ExchangeRemoteDataSourceIntegrationTests:
+        - ExchangeRemoteRepositoryTests 
+  ExchangeRemoteRepositoryIntegrationTests:
     build:
       targets:
-        ExchangeRemoteDataSourceIntegrationTests: all
+        ExchangeRemoteRepositoryIntegrationTests: all
     test:
       targets: 
-        - ExchangeRemoteDataSourceIntegrationTests 
+        - ExchangeRemoteRepositoryIntegrationTests 

@@ -8,7 +8,7 @@
 import XCTest
 import Foundation
 import Combine
-@testable import ExchangeRemoteDataSource
+@testable import ExchangeRemoteRepository
 
 class HttpEngineTest: XCTestCase {
     private var sut: HttpEngine!
